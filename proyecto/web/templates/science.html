@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block title %}How It Works | MammoPatch{% endblock %}
+
+{% block extra_css %}
+<style>
+  .page-header { text-align: center; padding: 90px 50px 40px 50px; max-width: 1000px; margin: 0 auto; }
+  .page-header h1 { font-family: 'Playfair Display', serif; font-size: 4rem; color: var(--text-main); margin-bottom: 24px; line-height: 1.1; }
+  .page-header p { font-size: 1.3rem; color: var(--text-muted); line-height: 1.8; }
+
+  .science-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; max-width: 1300px; margin: 80px auto; padding: 0 50px; align-items: center; }
+  .science-card { background: var(--bg-surface); padding: 60px; border-radius: 40px; box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.03); }
+  .science-card h3 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--brand-rose-dark); margin-top: 0; margin-bottom: 24px; line-height: 1.2; }
+  .science-card p { color: var(--text-muted); font-size: 1.15rem; line-height: 1.8; margin-bottom: 20px; }
+  .science-img { width: 100%; border-radius: 40px; height: 500px; display: block; box-shadow: var(--shadow-md); }
+
+  .stats-section { background: var(--brand-slate); color: white; padding: 100px 50px; margin: 100px 0; }
+  .stats-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px; text-align: center; }
+  .stat-number { font-family: 'Playfair Display', serif; font-size: 4.8rem; color: var(--brand-rose); margin-bottom: 15px; font-weight: 700; line-height: 1; }
+  .stat-desc { font-size: 1.15rem; opacity: 0.9; line-height: 1.6; padding: 0 20px; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>The Science Behind MammoPatch</h1>
+  <p>When a lactating milk duct experiences stasis or blockage, the epidermal tissue resting directly over it registers a distinct thermal elevation. This occurs significantly earlier than symptomatic pain. MammoPatch utilizes this biomedical phenomenon to empower mothers to act proactively.</p>
+</div>
+
+<div class="science-grid">
+  <div class="science-card">
+    <h3>Advanced Wearable Architecture</h3>
+    <p>MammoPatch integrates state-of-the-art engineering into an incredibly discrete form factor. The exterior shell utilizes a highly flexible, bio-compatible TPU polymer, guaranteeing skin safety and structural durability against moisture.</p>
+    <p>Safely encased within this soft exterior is an ultra-thin flexible printed circuit board (PCB). This board houses an array of high-precision AMG8833 infrared temperature sensors, low-emission indicator micro-LEDs, and specialized vibration motors designed to deliver precise mechanical relief without disturbing the mother's daily routine.</p>
+  </div>
+  <div>
+    <!-- SVG 3: Hardware Architecture -->
+    <svg class="science-img" viewBox="0 0 560 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The layers of MammoPatch" style="background:#ffffff">
+      <line x1="190" y1="110" x2="190" y2="380" stroke="#697479" stroke-width="2" stroke-dasharray="5 6"/>
+      <ellipse cx="190" cy="110" rx="130" ry="42" fill="#df9da9"/>
+      <ellipse cx="190" cy="200" rx="130" ry="42" fill="#8f9e8f"/>
+      <g fill="#526775"><circle cx="125" cy="200" r="8"/><circle cx="155" cy="214" r="8"/><circle cx="225" cy="186" r="8"/><circle cx="255" cy="200" r="8"/></g>
+      <ellipse cx="190" cy="290" rx="130" ry="42" fill="#526775"/>
+      <g fill="#ffffff"><circle cx="130" cy="290" r="6"/><circle cx="250" cy="290" r="6"/><circle cx="160" cy="303" r="6"/></g>
+      <circle cx="220" cy="277" r="6" fill="#df9da9"/>
+      <ellipse cx="190" cy="380" rx="130" ry="42" fill="#b85b6c"/>
+      <path d="M190 346V414M100 380H280" stroke="#ffffff" stroke-width="3" opacity=".8"/>
+      <g stroke="#697479" stroke-width="1.5"><line x1="322" y1="110" x2="345" y2="110"/><line x1="322" y1="200" x2="345" y2="200"/><line x1="322" y1="290" x2="345" y2="290"/><line x1="322" y1="380" x2="345" y2="380"/></g>
+      <g font-family="'Plus Jakarta Sans', sans-serif" font-size="17" fill="#2b3235">
+        <text x="352" y="116">Soft TPU case</text>
+        <text x="352" y="206">Vibration motors</text>
+        <text x="352" y="296">Circuit and LEDs</text>
+        <text x="352" y="386">AMG8833 sensor</text>
+      </g>
+      <g font-family="'Plus Jakarta Sans', sans-serif" font-size="15" fill="#697479" text-anchor="middle">
+        <text x="190" y="48">Outer side</text>
+        <text x="190" y="455">Skin side</text>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<div class="science-grid" style="direction: rtl;">
+  <div class="science-card" style="direction: ltr;">
+    <h3>The Quadrant Mapping Differential</h3>
+    <p>To provide accurate alerts, MammoPatch continuously scans four distinct anatomical zones (quadrants) of the breast.</p>
+    <p>Because every woman's baseline body temperature is unique and fluctuates naturally, an absolute temperature threshold is medically insufficient. Instead, MammoPatch employs a differential algorithmic approach. If the sensors calculate that one specific quadrant is sustaining a temperature roughly <strong>1.2 °C higher</strong> than the surrounding quadrants, the internal microcontroller registers a high probability of localized inflammation and immediately triggers the therapeutic response protocol.</p>
+  </div>
+  <div>
+    <!-- SVG 2: Temperature Map -->
+    <svg class="science-img" viewBox="0 0 560 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Temperature map of four breast areas" style="direction: ltr; background:#f9f5f0">
+      <defs><radialGradient id="hotSpot2"><stop offset="0" stop-color="#b85b6c"/><stop offset="1" stop-color="#df9da9"/></radialGradient></defs>
+      <circle cx="280" cy="205" r="175" fill="#ffffff" stroke="#8f9e8f" stroke-width="3"/>
+      <g fill="#8f9e8f" opacity=".9"><circle cx="224" cy="149" r="54"/><circle cx="336" cy="149" r="54"/><circle cx="224" cy="261" r="54"/></g>
+      <circle cx="336" cy="261" r="58" fill="url(#hotSpot2)"/>
+      <g font-family="'Plus Jakarta Sans', sans-serif" text-anchor="middle" fill="#ffffff">
+        <text x="224" y="146" font-size="13">Top inner</text><text x="224" y="168" font-size="18" font-weight="700">33.1°C</text>
+        <text x="336" y="146" font-size="13">Top outer</text><text x="336" y="168" font-size="18" font-weight="700">33.2°C</text>
+        <text x="224" y="258" font-size="13">Bottom inner</text><text x="224" y="280" font-size="18" font-weight="700">33.0°C</text>
+        <text x="336" y="258" font-size="13">Bottom outer</text><text x="336" y="280" font-size="18" font-weight="700">34.4°C</text>
+      </g>
+      <rect x="130" y="396" width="300" height="46" rx="23" fill="#fdf6f7" stroke="#b85b6c" stroke-width="2"/>
+      <text x="280" y="426" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" font-weight="700" fill="#b85b6c">Warmer area found: +1.3 °C</text>
+    </svg>
+  </div>
+</div>
+
+<div class="science-grid">
+  <div class="science-card">
+    <h3>Secure Data Transmission Protocol</h3>
+    <p>Our robust functional prototype utilizes a highly efficient ESP32 microcontroller system. This chip is responsible for rapidly processing the thermal array data and transmitting it wirelessly to the user dashboard.</p>
+    <p>Patient privacy is paramount. All data transmitted from the MammoPatch wearable to the cloud infrastructure utilizes end-to-end encryption protocols, assuring total compliance with stringent European data protection frameworks (GDPR) prior to reaching your personal device screen.</p>
+  </div>
+  <div>
+    <!-- SVG 4: Clean Data Flow Scheme -->
+<svg class="science-img" viewBox="0 0 560 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Data flow from patch to cloud dashboard" style="background:#ffffff; padding: 10px;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#526775"/>
+    </marker>
+  </defs>
+
+  <!-- BLOCK 1: WEARABLE PATCH -->
+  <g transform="translate(30, 20)">
+    <rect x="0" y="0" width="500" height="110" rx="20" fill="#fdf6f7" stroke="#df9da9" stroke-width="2"/>
+    <circle cx="50" cy="55" r="24" fill="#df9da9" opacity="0.2"/>
+    <text x="50" y="62" font-family="'Plus Jakarta Sans', sans-serif" font-size="20" text-anchor="middle">1</text>
+    <text x="90" y="48" font-family="'Playfair Display', serif" font-size="20" font-weight="700" fill="#2b3235">The Wearable Patch</text>
+    <text x="90" y="75" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" fill="#697479">Reads skin thermal matrix (AMG8833) &amp; triggers gentle vibration.</text>
+  </g>
+
+  <!-- CONNECTOR 1 -->
+  <g>
+    <line x1="280" y1="130" x2="280" y2="180" stroke="#526775" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+    <rect x="300" y="142" width="160" height="26" rx="6" fill="#f2f5f2"/>
+    <text x="380" y="159" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600" fill="#526775" text-anchor="middle">I2C &amp; GPIO Bus</text>
+  </g>
+
+  <!-- BLOCK 2: MICROCONTROLLER -->
+  <g transform="translate(30, 190)">
+    <rect x="0" y="0" width="500" height="110" rx="20" fill="#f2f5f2" stroke="#8f9e8f" stroke-width="2"/>
+    <circle cx="50" cy="55" r="24" fill="#8f9e8f" opacity="0.2"/>
+    <text x="50" y="62" font-family="'Plus Jakarta Sans', sans-serif" font-size="20" text-anchor="middle">2</text>
+    <text x="90" y="48" font-family="'Playfair Display', serif" font-size="20" font-weight="700" fill="#2b3235">ESP32 Microcontroller</text>
+    <text x="90" y="75" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" fill="#697479">Calculates relative quadrant ΔT ≥ 1.2 °C and manages alerts.</text>
+  </g>
+
+  <!-- CONNECTOR 2 -->
+  <g>
+    <line x1="280" y1="300" x2="280" y2="350" stroke="#526775" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#arrow)"/>
+    <rect x="300" y="312" width="180" height="26" rx="6" fill="#fdf6f7"/>
+    <text x="390" y="329" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600" fill="#b85b6c" text-anchor="middle">Encrypted TLS/SSL Sync</text>
+  </g>
+
+  <!-- BLOCK 3: CLOUD DASHBOARD -->
+  <g transform="translate(30, 360)">
+    <rect x="0" y="0" width="500" height="110" rx="20" fill="#f9f5f0" stroke="#526775" stroke-width="2"/>
+    <circle cx="50" cy="55" r="24" fill="#526775" opacity="0.15"/>
+    <text x="50" y="62" font-family="'Plus Jakarta Sans', sans-serif" font-size="20" text-anchor="middle">3</text>
+    <text x="90" y="48" font-family="'Playfair Display', serif" font-size="20" font-weight="700" fill="#2b3235">Cloud Web Dashboard</text>
+    <text x="90" y="75" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" fill="#697479">Renders 2D thermal heatmaps &amp; logs remote midwife guidance.</text>
+  </g>
+</svg>
+  </div>
+</div>
+
+<section class="stats-section">
+  <div class="stats-container">
+    <div>
+      <div class="stat-number">24–48h</div>
+      <div class="stat-desc">The critical early window where epidermal warming can be detected prior to painful symptoms.</div>
+    </div>
+    <div>
+      <div class="stat-number">1.2 °C</div>
+      <div class="stat-desc">The precise relative temperature differential required to automatically trigger the therapeutic protocol.</div>
+    </div>
+    <div>
+      <div class="stat-number">4</div>
+      <div class="stat-desc">Dedicated anatomical zones scanned concurrently to pinpoint the exact location of inflammation.</div>
+    </div>
+  </div>
+</section>
+{% endblock %}

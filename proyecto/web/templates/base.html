@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MammoPatch{% endblock %}</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+      :root {
+        --brand-rose: #df9da9;
+        --brand-rose-light: #fdf6f7;
+        --brand-rose-dark: #b85b6c;
+        --brand-sage: #8f9e8f;
+        --brand-sage-light: #f2f5f2;
+        --brand-beige: #f9f5f0;
+        --brand-slate: #526775;
+        
+        --text-main: #2b3235;
+        --text-muted: #697479;
+        --bg-page: #fcfafa;
+        --bg-surface: #ffffff;
+        
+        --shadow-sm: 0 4px 12px rgba(0,0,0,0.03);
+        --shadow-md: 0 12px 32px rgba(82, 103, 117, 0.08);
+        --radius-card: 24px;
+        --radius-pill: 100px;
+      }
+    
+      html { scroll-behavior: smooth; }
+      body { background-color: var(--bg-page); color: var(--text-main); font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.7; margin: 0; -webkit-font-smoothing: antialiased; }
+    
+      /* GLOBAL NAVIGATION */
+      .product-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(0,0,0,0.04); position: sticky; top: 0; z-index: 1000; }
+      .nav-brand { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 8px; text-decoration: none; }
+      .nav-brand span { color: var(--brand-rose-dark); }
+      .nav-links { display: flex; gap: 32px; align-items: center; }
+      .nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.3s; }
+      .nav-links a:hover, .nav-links a.active { color: var(--brand-rose-dark); }
+    
+      /* BUTTONS */
+      .btn { padding: 18px 40px; border-radius: var(--radius-pill); font-weight: 700; font-size: 1.05rem; cursor: pointer; transition: all 0.3s ease; border: none; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; font-family: inherit; }
+      .btn-primary { background: var(--brand-slate); color: white; box-shadow: 0 8px 24px rgba(82, 103, 117, 0.25); }
+      .btn-primary:hover { background: #3f525e; transform: translateY(-3px); }
+      .btn-secondary { background: var(--bg-surface); color: var(--text-main); border: 2px solid #e0e5e8; }
+      .btn-secondary:hover { background: var(--brand-beige); border-color: var(--brand-beige); }
+    
+      /* GLOBAL FOOTER */
+      .site-footer { background: var(--brand-slate); color: white; padding: 100px 50px 40px 50px; margin-top: 100px; }
+      .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; max-width: 1400px; margin: 0 auto; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 60px; }
+      .footer-brand { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; margin-bottom: 20px; text-decoration: none; color: white; display: inline-block; }
+      .footer-col h4 { font-size: 1.15rem; margin-bottom: 24px; color: var(--brand-beige); }
+      .footer-col ul { list-style: none; padding: 0; margin: 0; }
+      .footer-col ul li { margin-bottom: 16px; }
+      .footer-col ul li a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s; font-size: 1.05rem; }
+      .footer-col ul li a:hover { color: white; }
+      .footer-bottom { text-align: center; padding-top: 40px; color: rgba(255,255,255,0.5); font-size: 1rem; }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav class="product-nav">
+        <a href="{% url 'home' %}" class="nav-brand">MammoPatch <span>♡</span></a>
+        <div class="nav-links">
+            <a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a>
+            <a href="{% url 'science' %}" class="{% if 'science' in request.path %}active{% endif %}">Science & Tech</a>
+            <a href="{% url 'about' %}" class="{% if 'about' in request.path %}active{% endif %}">About Us</a>
+            <!-- Botón cambiado de "See Dashboard" a "Pre-order Now" -->
+            <a href="#preorder" class="btn-primary" style="padding: 12px 28px; border-radius: 100px; color: white;">Pre-order Now</a>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div>
+                <a href="{% url 'home' %}" class="footer-brand">MammoPatch <span style="color: var(--brand-rose);">♡</span></a>
+                <p style="color: rgba(255,255,255,0.7); max-width: 320px; margin-top: 20px;">
+                    Gentle, non-invasive technology assisting breastfeeding mothers in the early detection of blocked milk ducts through advanced thermal monitoring.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="{% url 'science' %}">How It Works</a></li>
+                    <li><a href="{% url 'home' %}#features">Design Details</a></li>
+                    <li><a href="{% url 'home' %}#technology">Interactive Demo</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="{% url 'about' %}">Our Mission</a></li>
+                    <li><a href="{% url 'science' %}">Technology</a></li>
+                    <li><a href="{% url 'about' %}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="{% url 'home' %}#faq">Help Center & FAQ</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 MammoPatch. All rights reserved. Designed for maternal wellbeing.
+        </div>
+    </footer>
+</body>
+</html>

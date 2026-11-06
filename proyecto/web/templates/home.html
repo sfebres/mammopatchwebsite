@@ -1,0 +1,431 @@
+{% extends "base.html" %}
+
+{% block title %}Home | MammoPatch{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* HERO */
+  .hero-section { padding: 90px 50px; max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
+  .hero-content h1 { font-family: 'Playfair Display', serif; font-size: 4.5rem; line-height: 1.1; margin: 0 0 24px 0; }
+  .hero-content h1 i { color: var(--brand-rose-dark); }
+  .hero-subtitle { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 40px; max-width: 92%; line-height: 1.8; }
+  .hero-image-wrapper { position: relative; border-radius: 40px; overflow: hidden; box-shadow: var(--shadow-md); height: 620px; background: var(--bg-surface); }
+  .hero-image-wrapper svg { width: 100%; height: 100%; display: block; }
+  .hero-floating-badge { position: absolute; bottom: 40px; left: -20px; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); padding: 22px 32px; border-radius: 24px; box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 18px; animation: float 4s ease-in-out infinite; z-index: 10; }
+  @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+
+  /* TRUST BANNER */
+  .trust-banner { background: var(--brand-beige); padding: 48px 0; text-align: center; border-top: 1px solid #efe8e1; border-bottom: 1px solid #efe8e1; }
+  .trust-banner p { margin: 0 0 20px 0; font-size: 0.95rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; }
+  .trust-logos { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; opacity: 0.7; align-items: center; }
+  .trust-logos span { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--brand-slate); }
+
+  /* SECTIONS */
+  .section-container { padding: 110px 50px; max-width: 1400px; margin: 0 auto; }
+  .section-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 3.2rem; margin-bottom: 24px; }
+  .section-subtitle { text-align: center; color: var(--text-muted); font-size: 1.25rem; max-width: 850px; margin: 0 auto 70px auto; }
+
+  /* MISSION GRID */
+  .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; background: var(--bg-surface); border-radius: 40px; padding: 70px; box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.03); }
+  .story-image { width: 100%; border-radius: 28px; height: 460px; display: block; }
+  .story-content h3 { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-top: 0; color: var(--brand-rose-dark); }
+  .story-content p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.8; }
+
+  /* SPECIALIST OPINIONS */
+  .specialist-section { background: var(--brand-slate); color: white; padding: 100px 50px; margin: 40px 0; }
+  .specialist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1400px; margin: 0 auto; }
+  .quote-card { background: rgba(255,255,255,0.05); padding: 50px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); }
+  .quote-text { font-family: 'Playfair Display', serif; font-size: 1.4rem; line-height: 1.7; margin-bottom: 30px; font-style: italic; }
+  .quote-author { display: flex; align-items: center; gap: 16px; }
+  .author-info h4 { margin: 0; font-size: 1.2rem; color: var(--brand-beige); }
+  .author-info p { margin: 0; font-size: 0.95rem; opacity: 0.8; }
+
+  /* STEPS */
+  .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
+  .step-card { background: var(--bg-surface); padding: 50px 40px 40px 40px; border-radius: var(--radius-card); box-shadow: var(--shadow-sm); text-align: center; border: 1px solid rgba(0,0,0,0.03); position: relative; }
+  .step-number { width: 70px; height: 70px; background: var(--brand-slate); color: white; font-family: 'Playfair Display', serif; font-size: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: -85px auto 24px auto; border: 8px solid var(--bg-page); }
+  .step-card h3 { font-size: 1.5rem; margin-bottom: 16px; font-family: 'Playfair Display', serif; }
+  .step-card p { color: var(--text-muted); font-size: 1.05rem; }
+
+  /* HARDWARE ANATOMY */
+  .hardware-container { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; background: var(--brand-beige); border-radius: 40px; padding: 70px; margin-top: 40px; }
+  .hardware-img { width: 100%; border-radius: 28px; height: 500px; display: block; box-shadow: var(--shadow-md); }
+
+  /* FEATURES */
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 32px; }
+  .feature-card { background: var(--bg-surface); padding: 48px; border-radius: var(--radius-card); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.03); transition: transform 0.3s; display: flex; flex-direction: column; gap: 20px; }
+  .feature-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+  .feature-icon { width: 70px; height: 70px; background: var(--brand-rose-light); color: var(--brand-rose-dark); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+  .feature-card h3 { margin: 0; font-size: 1.6rem; font-family: 'Playfair Display', serif; }
+  .feature-card p { color: var(--text-muted); margin: 0; font-size: 1.1rem; }
+
+  /* APP SHOWCASE - PROPORTIONAL & STYLED MOBILE CONTAINER */
+  .app-showcase { background: linear-gradient(135deg, var(--brand-sage-light) 0%, var(--brand-beige) 100%); border-radius: 48px; padding: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin: 40px auto; max-width: 1400px; box-shadow: inset 0 0 40px rgba(0,0,0,0.02); }
+  
+  .app-mockup { width: 320px; height: 650px; background: #0f1115; border-radius: 48px; border: 10px solid #1f232b; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35); margin: 0 auto; position: relative; display: flex; flex-direction: column; overflow: hidden; }
+  .app-screen { background: #ffffff; width: 100%; height: 100%; border-radius: 38px; overflow: hidden; position: relative; padding: 20px 16px; display: flex; flex-direction: column; box-sizing: border-box; }
+  .app-camera { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 90px; height: 24px; background: #0f1115; border-radius: 16px; z-index: 10; }
+  
+  .app-status { background: var(--brand-rose-light); border-radius: 24px; padding: 24px 16px; text-align: center; margin-top: 36px; margin-bottom: 20px; transition: background 0.4s ease; border: 1px solid rgba(0,0,0,0.03); }
+  .app-heart { font-size: 2.4rem; color: var(--brand-rose-dark); margin-bottom: 8px; line-height: 1; }
+  .app-state { font-size: 1.35rem; font-weight: 700; color: var(--text-main); }
+  .app-desc { font-size: 0.85rem; color: var(--text-muted); margin-top: 6px; line-height: 1.4; }
+  
+  .matrix-ui { width: 100%; aspect-ratio: 1; background: #f8f9fa; border-radius: 50%; padding: 12px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px; box-shadow: inset 0 4px 16px rgba(0,0,0,0.04); box-sizing: border-box; }
+  .q-cell { border-radius: 18px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; font-weight: 600; transition: all 0.5s ease; text-align: center; padding: 8px; font-size: 0.85rem; }
+  .q-1 { background-color: var(--brand-sage); border-top-left-radius: 100%; }
+  .q-2 { background-color: var(--brand-sage); border-top-right-radius: 100%; }
+  .q-3 { background-color: var(--brand-sage); border-bottom-left-radius: 100%; }
+  .q-4 { background-color: var(--brand-sage); border-bottom-right-radius: 100%; }
+  .q-alert { background-color: var(--brand-rose-dark) !important; animation: pulse 1.5s infinite alternate; box-shadow: 0 0 20px rgba(184, 91, 108, 0.6); }
+  @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.04); } }
+
+  /* FAQ */
+  .faq-container { max-width: 950px; margin: 0 auto; }
+  .faq-item { background: var(--bg-surface); border-radius: 18px; margin-bottom: 20px; box-shadow: var(--shadow-sm); overflow: hidden; border: 1px solid rgba(0,0,0,0.02); }
+  .faq-summary { padding: 30px 40px; font-weight: 700; font-size: 1.2rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; color: var(--text-main); }
+  .faq-summary::-webkit-details-marker { display: none; }
+  .faq-summary::after { content: '+'; font-size: 2rem; color: var(--brand-rose-dark); transition: transform 0.3s; font-weight: 300; }
+  details[open] .faq-summary::after { transform: rotate(45deg); }
+  .faq-content { padding: 0 40px 36px 40px; color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- HERO SECTION -->
+<section class="hero-section">
+  <div class="hero-content">
+    <h1>Support for your<br><i>nursing journey.</i></h1>
+    <p class="hero-subtitle">
+      A discreet, flexible patch made of soft TPU plastic that sits naturally inside your nursing bra. It continuously monitors your skin temperature and provides a gentle, targeted vibration massage to help prevent blocked milk ducts before they escalate.
+    </p>
+    <div style="display: flex; gap: 16px;">
+      <a href="#technology" class="btn btn-primary">See the Dashboard</a>
+      <a href="{% url 'science' %}" class="btn btn-secondary">How It Works</a>
+    </div>
+  </div>
+  
+  <div class="hero-image-wrapper">
+    <!-- SVG 1: Hero Illustration -->
+    <svg viewBox="0 0 600 620" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of the MammoPatch inside a nursing bra">
+      <defs>
+        <linearGradient id="heroBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fdf6f7"/><stop offset="1" stop-color="#f2e3dc"/></linearGradient>
+        <radialGradient id="heroGlow"><stop offset="0" stop-color="#b85b6c" stop-opacity=".5"/><stop offset="1" stop-color="#b85b6c" stop-opacity="0"/></radialGradient>
+      </defs>
+      <rect width="600" height="620" fill="url(#heroBg)"/>
+      <circle cx="90" cy="90" r="140" fill="#f9ecee"/>
+      <circle cx="540" cy="570" r="180" fill="#f2f5f2"/>
+      <path d="M215 120 C225 55 330 35 400 75" fill="none" stroke="#ffffff" stroke-width="22" stroke-linecap="round" opacity=".85"/>
+      <circle cx="300" cy="330" r="235" fill="#ffffff" opacity=".6"/>
+      <circle cx="300" cy="330" r="175" fill="#df9da9"/>
+      <circle cx="300" cy="330" r="150" fill="#e8b3bd"/>
+      <path d="M300 185V475M155 330H445" stroke="#ffffff" stroke-width="6" opacity=".85"/>
+      <g fill="#8f9e8f"><circle cx="235" cy="265" r="42"/><circle cx="365" cy="265" r="42"/><circle cx="235" cy="395" r="42"/><circle cx="365" cy="395" r="42"/></g>
+      <circle cx="365" cy="395" r="95" fill="url(#heroGlow)"/>
+      <g fill="#ffffff"><circle cx="272" cy="298" r="9"/><circle cx="328" cy="298" r="9"/><circle cx="272" cy="362" r="9"/></g>
+      <circle cx="328" cy="362" r="10" fill="#b85b6c"/>
+      <rect x="280" y="310" width="40" height="40" rx="9" fill="#526775"/>
+      <g fill="none" stroke="#b85b6c" stroke-width="5" stroke-linecap="round"><path d="M425 360 Q445 395 425 430"/><path d="M445 345 Q475 395 445 445" opacity=".6"/></g>
+    </svg>
+    <div class="hero-floating-badge">
+      <div style="width: 64px; height: 64px; background: var(--brand-rose-light); border-radius: 18px; display: flex; align-items: center; justify-content: center; color: var(--brand-rose-dark); font-weight: bold; font-size: 1.3rem;">♡</div>
+      <div>
+        <div style="font-weight: 700; color: var(--text-main); font-size: 1.2rem;">Gentle Reassurance</div>
+        <div style="font-size: 0.95rem; color: var(--text-muted);">Quiet care that works in the background</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BANNER -->
+<div class="trust-banner">
+  <p>Engineered for gentle, human-centered maternal health technology</p>
+  <div class="trust-logos">
+    <span>Health 4.0</span>
+    <span>Biomedical Engineering</span>
+    <span>Data Privacy (GDPR)</span>
+    <span>Shaped by Health Professionals</span>
+  </div>
+</div>
+
+<!-- MISSION SECTION -->
+<section id="mission" class="section-container">
+  <div class="story-grid">
+    <div>
+      <!-- SVG 2: Temperature Map -->
+      <svg class="story-image" viewBox="0 0 560 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Temperature map of four breast areas" style="background:#f9f5f0">
+        <defs><radialGradient id="hotSpot"><stop offset="0" stop-color="#b85b6c"/><stop offset="1" stop-color="#df9da9"/></radialGradient></defs>
+        <circle cx="280" cy="205" r="175" fill="#ffffff" stroke="#8f9e8f" stroke-width="3"/>
+        <g fill="#8f9e8f" opacity=".9"><circle cx="224" cy="149" r="54"/><circle cx="336" cy="149" r="54"/><circle cx="224" cy="261" r="54"/></g>
+        <circle cx="336" cy="261" r="58" fill="url(#hotSpot)"/>
+        <g font-family="'Plus Jakarta Sans', sans-serif" text-anchor="middle" fill="#ffffff">
+          <text x="224" y="146" font-size="13">Top inner</text><text x="224" y="168" font-size="18" font-weight="700">33.1°C</text>
+          <text x="336" y="146" font-size="13">Top outer</text><text x="336" y="168" font-size="18" font-weight="700">33.2°C</text>
+          <text x="224" y="258" font-size="13">Bottom inner</text><text x="224" y="280" font-size="18" font-weight="700">33.0°C</text>
+          <text x="336" y="258" font-size="13">Bottom outer</text><text x="336" y="280" font-size="18" font-weight="700">34.4°C</text>
+        </g>
+        <rect x="130" y="396" width="300" height="46" rx="23" fill="#fdf6f7" stroke="#b85b6c" stroke-width="2"/>
+        <text x="280" y="426" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" font-weight="700" fill="#b85b6c">Warmer area found: +1.3 °C</text>
+      </svg>
+    </div>
+    <div class="story-content">
+      <h3>Caring early, before it hurts.</h3>
+      <p>Between 1 in 10 and 1 in 3 breastfeeding mothers (10–33%) experience mastitis, a painful breast inflammation. It is most common in the first 12 weeks after birth. Most mothers only receive help once the pain, redness, or fever has already escalated significantly.</p>
+      <p><strong>MammoPatch is designed to alter that timeline.</strong></p>
+      <p>When a milk duct is blocked, the skin over it becomes slightly warmer—usually by about 1 to 2 °C. This thermal shift happens often a day or two (24-48 hours) before any pain sets in. MammoPatch identifies that early localized warmth, highlights the affected quadrant, and initiates a gentle vibration to naturally encourage milk flow.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIALIST OPINIONS -->
+<section class="specialist-section">
+  <h2 class="section-title" style="color: white;">Guided by Experts Who Truly Care</h2>
+  <p class="section-subtitle" style="color: var(--brand-beige);">Engineered in close consultation with clinical gynecologists and maternal care specialists.</p>
+  
+  <div class="specialist-grid">
+    <div class="quote-card">
+      <p class="quote-text">"Monitoring the localized skin temperature of the breast is an excellent, non-invasive method to spot inflammation early, well before systemic symptoms like a fever appear. A gentle, targeted vibration—roughly as intense as an electric toothbrush—is entirely safe and highly effective in helping to prevent deep blockages."</p>
+      <div class="quote-author">
+        <div class="author-info">
+          <h4>Gynecologist Insight</h4>
+          <p>Women's Health & Obstetrics Specialist</p>
+        </div>
+      </div>
+    </div>
+    <div class="quote-card">
+      <p class="quote-text">"Mothers usually only seek help when mastitis is already fully developed and extremely painful. A gentle, early mechanical massage is ideal for simple stasis cases. However, we ensured the device protocol clearly states: if there is fever, severe pain, or purulent discharge, the mother must immediately consult a health professional."</p>
+      <div class="quote-author">
+        <div class="author-info">
+          <h4>Clinical Nurse Insight</h4>
+          <p>Breastfeeding & Postpartum Care Expert</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section id="how-it-works" class="section-container">
+  <h2 class="section-title">Designed for Your Daily Routine</h2>
+  <p class="section-subtitle">A seamless wearable device that integrates naturally into everyday life after birth, providing constant care without becoming the center of attention.</p>
+
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-number">1</div>
+      <h3>Discreet & Flexible</h3>
+      <p>Constructed from soft, flexible 3D-printed TPU. Its engineered rounded shape is designed to sit comfortably and invisibly inside a standard nursing bra.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">2</div>
+      <h3>Quiet Monitoring</h3>
+      <p>An internal array of precise infrared sensors checks four distinct areas of the breast continuously, scanning for anomalous thermal gradients.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">3</div>
+      <h3>Soothing Relief</h3>
+      <p>Integrated micro-motors provide a soft, targeted vibration directly to the affected quadrant, while tiny LED lights offer immediate visual feedback.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HARDWARE INTEGRATION -->
+<section class="section-container">
+  <div class="hardware-container">
+    <div>
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 2.8rem; margin: 0 0 20px 0; color: var(--text-main);">Seamless Everyday Integration</h2>
+      <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.8;">
+        MammoPatch is meticulously designed to be thin, lightweight, and rounded. This allows it to sit comfortably inside your nursing bra under your normal clothes, ensuring it is easy to remove quickly for feeding or pumping.
+      </p>
+      <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.8;">
+        A highly intuitive, secure web dashboard displays the real-time temperature of each quadrant alongside a digital log of the automated massages. This empowers you, your midwife, and your lactation consultant to track your health data collaboratively.
+      </p>
+    </div>
+    <div>
+      <!-- SVG 3: Hardware Anatomy -->
+      <svg class="hardware-img" viewBox="0 0 560 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The layers of MammoPatch" style="background:#ffffff">
+        <line x1="190" y1="110" x2="190" y2="380" stroke="#697479" stroke-width="2" stroke-dasharray="5 6"/>
+        <ellipse cx="190" cy="110" rx="130" ry="42" fill="#df9da9"/>
+        <ellipse cx="190" cy="200" rx="130" ry="42" fill="#8f9e8f"/>
+        <g fill="#526775"><circle cx="125" cy="200" r="8"/><circle cx="155" cy="214" r="8"/><circle cx="225" cy="186" r="8"/><circle cx="255" cy="200" r="8"/></g>
+        <ellipse cx="190" cy="290" rx="130" ry="42" fill="#526775"/>
+        <g fill="#ffffff"><circle cx="130" cy="290" r="6"/><circle cx="250" cy="290" r="6"/><circle cx="160" cy="303" r="6"/></g>
+        <circle cx="220" cy="277" r="6" fill="#df9da9"/>
+        <ellipse cx="190" cy="380" rx="130" ry="42" fill="#b85b6c"/>
+        <path d="M190 346V414M100 380H280" stroke="#ffffff" stroke-width="3" opacity=".8"/>
+        <g stroke="#697479" stroke-width="1.5"><line x1="322" y1="110" x2="345" y2="110"/><line x1="322" y1="200" x2="345" y2="200"/><line x1="322" y1="290" x2="345" y2="290"/><line x1="322" y1="380" x2="345" y2="380"/></g>
+        <g font-family="'Plus Jakarta Sans', sans-serif" font-size="17" fill="#2b3235">
+          <text x="352" y="116">Soft TPU case</text>
+          <text x="352" y="206">Vibration motors</text>
+          <text x="352" y="296">Circuit and LEDs</text>
+          <text x="352" y="386">Temperature sensor</text>
+        </g>
+        <g font-family="'Plus Jakarta Sans', sans-serif" font-size="15" fill="#697479" text-anchor="middle">
+          <text x="190" y="48">Outer side</text>
+          <text x="190" y="455">Skin side</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES GRID -->
+<section id="features" class="section-container" style="background: var(--bg-surface); border-radius: 60px; max-width: 95%;">
+  <h2 class="section-title">Built with Care and Precision</h2>
+  <p class="section-subtitle">Every specific feature of the MammoPatch is engineered prioritizing comfort, clinical safety, and ease of use for the mother.</p>
+  
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🌡️</div>
+      <h3>Temperature Map</h3>
+      <p>A sophisticated infrared sensor accurately measures skin temperature in four distinct areas of the breast. It reads only the passive heat your body emits and does not send out any radiation.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">✨</div>
+      <h3>Gentle Vibration</h3>
+      <p>Micro-motors deliver a soft, localized massage directly over the area warming up, aiding milk flow. The vibration is intentionally kept light, akin to an electric toothbrush.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📱</div>
+      <h3>Web Dashboard</h3>
+      <p>Live temperature trends, differential alerts, and historical logs are securely displayed on a clean web interface accessible to you and your healthcare provider.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💧</div>
+      <h3>Fluid Resistant Design</h3>
+      <p>The TPU casing is hermetically designed to be sealed. Milk, sweat, and moisture cannot reach the internal electronics, ensuring durability and hygiene.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔋</div>
+      <h3>Safe Power Management</h3>
+      <p>Utilizes a heavily protected, ultra-low-voltage battery optimized for safety and longevity. Intelligent low-power modes maximize device up-time between charges.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔒</div>
+      <h3>Private by Design</h3>
+      <p>Your biometric data is transmitted strictly over secure, encrypted connections. Data handling protocols are strictly aligned with comprehensive European GDPR standards.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE APP SHOWCASE -->
+<section id="technology" class="app-showcase">
+  <div>
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 3.2rem; line-height: 1.15; margin: 0 0 24px 0; color: var(--text-main);">Clarity without clutter.</h2>
+    <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 36px; line-height: 1.7;">
+      Our web dashboard visualizes thermal data through a straightforward 4-quadrant map. When one area consistently registers warmer than the rest (&Delta;T &ge; 1.2 &deg;C), the system highlights it immediately.
+    </p>
+    <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 32px; font-style: italic;">
+      *Note: Displayed readings are simulated for technical demonstration. MammoPatch is an engineering prototype undergoing technical validation.
+    </p>
+    
+    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+      <button class="btn btn-primary" style="background: var(--brand-rose-dark);" onclick="triggerBlockage()">Simulate Alert</button>
+      <button class="btn btn-secondary" style="background: white;" onclick="resetMonitor()">Return to Normal</button>
+    </div>
+  </div>
+
+  <div class="app-mockup">
+    <div class="app-screen">
+      <div class="app-camera"></div>
+      <div style="text-align: center; font-weight: 700; font-size: 0.95rem; color: var(--brand-slate); margin-top: 18px;">MammoPatch UI</div>
+      
+      <div class="app-status" id="ui-card">
+        <div class="app-heart" id="ui-icon">♡</div>
+        <div class="app-state" id="ui-title">All Clear</div>
+        <div class="app-desc" id="ui-desc">Thermal balance detected across all quadrants.</div>
+      </div>
+
+      <div style="padding: 0 4px;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px; font-weight: 600;">
+          <span>Thermal Map</span>
+          <span id="ui-temp" style="color: var(--text-main); font-weight: 700;">Diff 0.3 °C</span>
+        </div>
+        
+        <div class="matrix-ui">
+          <div class="q-cell q-1" id="ui-q1">Top Inner<br><span style="font-size: 0.75rem; font-weight:400; margin-top: 2px;">33.1°C</span></div>
+          <div class="q-cell q-2" id="ui-q2">Top Outer<br><span style="font-size: 0.75rem; font-weight:400; margin-top: 2px;">33.2°C</span></div>
+          <div class="q-cell q-3" id="ui-q3">Bot Inner<br><span style="font-size: 0.75rem; font-weight:400; margin-top: 2px;">33.0°C</span></div>
+          <div class="q-cell q-4" id="ui-q4">Bot Outer<br><span style="font-size: 0.75rem; font-weight:400; margin-top: 2px;">33.3°C</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPANDED FAQ SECTION -->
+<section id="faq" class="section-container" style="padding-top: 0;">
+  <h2 class="section-title" style="margin-bottom: 60px;">Frequently Asked Questions</h2>
+  
+  <div class="faq-container">
+    <details class="faq-item" open>
+      <summary class="faq-summary">Is the vibration safe for inflamed tissue?</summary>
+      <div class="faq-content">
+        Yes. It is engineered to be extremely gentle, matching the intensity of a soft electric toothbrush, which is explicitly recommended by our consulting gynecologist. Deep, aggressive massage on an already inflamed breast can exacerbate tissue damage, so the MammoPatch keeps stimulation very light. You should immediately cease use and consult a professional if symptoms progress to systemic fever, severe localized pain, skin redness, or purulent discharge.
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-summary">Can I comfortably wear the patch while nursing or pumping?</summary>
+      <div class="faq-content">
+        MammoPatch features an ultra-thin profile, specifically designed to be easily slipped out of the bra cup prior to latching or attaching a breast pump flange. Its flexibility ensures it won't interfere with your standard maternity wear throughout the day.
+      </div>
+    </details>
+    
+    <details class="faq-item">
+      <summary class="faq-summary">Will the device fit securely in my specific nursing bra?</summary>
+      <div class="faq-content">
+        It is anatomically sculpted to rest inside standard maternity and nursing bras and can be effectively worn on either breast. The pliable, soft TPU casing naturally conforms to varied anatomical shapes.
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-summary">Does the device emit any harmful radiation or heat?</summary>
+      <div class="faq-content">
+        Absolutely not. The internal array utilizes strictly passive infrared sensors. It solely reads the thermal energy naturally emitted by your skin. Furthermore, extensive thermal regulation safety tests ensure the exterior surface of the patch remains safely below 41 °C at all times.
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-summary">Is my biometric data visible to my healthcare provider?</summary>
+      <div class="faq-content">
+        Yes, that is a core feature. The secure web dashboard dynamically graphs temperature trends and maintains a precise log of automated massages. This allows you to review historical data alongside your midwife or lactation consultant. You can also manually input secondary symptoms (like pain severity or redness) into the integrated digital diary.
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-summary">Does this replace clinical diagnosis or treat mastitis?</summary>
+      <div class="faq-content">
+        No. MammoPatch is strictly an early-warning preventative aid. It does not diagnose medical conditions and it does not cure established infections. If you experience a high fever, intense debilitating pain, hard distinct lumps, or pus, you must contact your medical provider immediately.
+      </div>
+    </details>
+  </div>
+</section>
+
+<script>
+  function triggerBlockage() {
+    document.getElementById('ui-card').style.background = '#f9ecee';
+    document.getElementById('ui-icon').innerText = '!';
+    document.getElementById('ui-title').innerText = 'Warmer Area';
+    document.getElementById('ui-title').style.color = 'var(--brand-rose-dark)';
+    document.getElementById('ui-desc').innerText = 'Bottom outer quadrant is elevated. Gentle vibration engaged.';
+    document.getElementById('ui-temp').innerText = 'Diff 1.3 °C';
+    document.getElementById('ui-temp').style.color = 'var(--brand-rose-dark)';
+    
+    document.getElementById('ui-q4').classList.add('q-alert');
+    document.getElementById('ui-q4').innerHTML = "Bot Outer<br><span style='font-size: 0.75rem; font-weight:400; margin-top: 2px;'>34.4°C</span>";
+  }
+
+  function resetMonitor() {
+    document.getElementById('ui-card').style.background = 'var(--brand-rose-light)';
+    document.getElementById('ui-icon').innerText = '♡';
+    document.getElementById('ui-title').innerText = 'All Clear';
+    document.getElementById('ui-title').style.color = 'var(--text-main)';
+    document.getElementById('ui-desc').innerText = 'Thermal balance detected across all quadrants.';
+    document.getElementById('ui-temp').innerText = 'Diff 0.3 °C';
+    document.getElementById('ui-temp').style.color = 'var(--text-main)';
+    
+    document.getElementById('ui-q4').classList.remove('q-alert');
+    document.getElementById('ui-q4').innerHTML = "Bot Outer<br><span style='font-size: 0.75rem; font-weight:400; margin-top: 2px;'>33.3°C</span>";
+  }
+</script>
+{% endblock %}

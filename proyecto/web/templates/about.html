@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}About Us | MammoPatch{% endblock %}
+
+{% block extra_css %}
+<style>
+  .about-hero { max-width: 1200px; margin: 80px auto; padding: 0 50px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .about-hero h1 { font-family: 'Playfair Display', serif; font-size: 4rem; color: var(--text-main); margin-bottom: 24px; line-height: 1.1; }
+  .about-hero p { font-size: 1.2rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 20px; }
+  .about-img { width: 100%; border-radius: 40px; height: 550px; display: block; }
+
+  .dashboard-container { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; background: var(--bg-surface); border-radius: 40px; padding: 80px; margin: 100px auto; max-width: 1300px; box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.03); }
+
+  .values-section { background: var(--brand-beige); padding: 100px 50px; border-radius: 48px; max-width: 1300px; margin: 0 auto 100px auto; }
+  .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 50px; }
+  .value-box { background: var(--bg-surface); padding: 45px; border-radius: 30px; box-shadow: var(--shadow-sm); }
+  .value-box h4 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--brand-rose-dark); margin-top: 0; margin-bottom: 16px; }
+  .value-box p { color: var(--text-muted); margin: 0; font-size: 1.1rem; line-height: 1.8; }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="about-hero">
+  <div>
+    <h1>Supporting new mothers through gentle innovation.</h1>
+    <p>The core objective of MammoPatch is to empower breastfeeding mothers by identifying blocked milk ducts at the earliest possible stage, significantly reducing the risk of developing painful clinical mastitis.</p>
+    <p>By seamlessly merging highly accurate thermal sensors, bio-compatible flexible materials, and an incredibly intuitive digital interface, we have designed a preventative tool that operates silently in the background of a mother's demanding schedule.</p>
+  </div>
+  <div>
+    <!-- SVG 5: Heart Illustration -->
+    <svg class="about-img" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Soft illustration of a heart with the MammoPatch inside">
+      <defs><linearGradient id="aboutBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fdf6f7"/><stop offset="1" stop-color="#f9f5f0"/></linearGradient></defs>
+      <rect width="600" height="500" fill="url(#aboutBg)"/>
+      <circle cx="480" cy="110" r="120" fill="#ffffff" opacity=".65"/>
+      <path d="M0 420 Q150 340 300 400 T600 380 V500 H0Z" fill="#f2f5f2"/>
+      <path d="M0 460 Q200 400 400 450 T600 440 V500 H0Z" fill="#8f9e8f" opacity=".5"/>
+      <path d="M300 385 C120 265 150 130 250 130 C290 130 300 160 300 172 C300 160 310 130 350 130 C450 130 480 265 300 385Z" fill="#df9da9"/>
+      <circle cx="300" cy="245" r="66" fill="#ffffff"/>
+      <path d="M300 185V305M240 245H360" stroke="#df9da9" stroke-width="4"/>
+      <g fill="#8f9e8f"><circle cx="270" cy="215" r="14"/><circle cx="330" cy="215" r="14"/><circle cx="270" cy="275" r="14"/></g>
+      <circle cx="330" cy="275" r="14" fill="#b85b6c"/>
+    </svg>
+  </div>
+</section>
+
+<section class="dashboard-container">
+  <div>
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--brand-rose-dark); margin-top: 0; margin-bottom: 24px;">An Empowering Dashboard</h2>
+    <p style="font-size: 1.2rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 20px;">
+      Our sophisticated web architecture continuously graphs thermal variances across the entire breast. When the algorithmic threshold (&Delta;T &ge; 1.2 &deg;C) is met, the system instantly logs a visual alert and records the duration of the automated therapeutic massage.
+    </p>
+    <p style="font-size: 1.2rem; color: var(--text-muted); line-height: 1.8;">
+      The user interface is intentionally engineered to remain clean, accessible, and devoid of medical clutter, ensuring that both mothers and lactation specialists can interpret the biometric data rapidly without feeling overwhelmed.
+    </p>
+  </div>
+  <div>
+    <!-- SVG 6: Temperature Graph -->
+    <svg viewBox="0 0 480 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Example graph: one area gets warmer than the others" style="width: 100%; border-radius: 28px; height: 380px; box-shadow: var(--shadow-md); background:#ffffff; display: block;">
+      <g font-family="'Plus Jakarta Sans', sans-serif">
+        <text x="30" y="38" font-size="18" font-weight="700" fill="#526775">Temperature Index</text>
+        <path d="M50 70V290H450" fill="none" stroke="#c9d1d5" stroke-width="2"/>
+        <g stroke="#e8ecee" stroke-width="1"><line x1="50" y1="130" x2="450" y2="130"/><line x1="50" y1="190" x2="450" y2="190"/><line x1="50" y1="250" x2="450" y2="250"/></g>
+        <polyline points="50,222 130,218 210,224 290,219 370,222 440,220" fill="none" stroke="#8f9e8f" stroke-width="3" stroke-linejoin="round"/>
+        <polyline points="50,234 130,230 210,236 290,231 370,234 440,232" fill="none" stroke="#8f9e8f" stroke-width="3" stroke-linejoin="round" opacity=".7"/>
+        <polyline points="50,210 130,207 210,212 290,208 370,210 440,208" fill="none" stroke="#8f9e8f" stroke-width="3" stroke-linejoin="round" opacity=".5"/>
+        <polyline points="50,226 130,223 210,225 270,214 320,185 370,140 440,108" fill="none" stroke="#b85b6c" stroke-width="4" stroke-linejoin="round"/>
+        <line x1="50" y1="186" x2="450" y2="186" stroke="#b85b6c" stroke-width="1.5" stroke-dasharray="6 6"/>
+        <text x="56" y="178" font-size="12" fill="#b85b6c">Clinical Alert Threshold: +1.2 °C</text>
+        <circle cx="320" cy="185" r="9" fill="#ffffff" stroke="#b85b6c" stroke-width="4"/>
+        <text x="320" y="164" font-size="13" font-weight="700" fill="#b85b6c" text-anchor="middle">Alert Logged</text>
+        <rect x="310" y="305" width="110" height="14" rx="7" fill="#df9da9"/>
+        <text x="365" y="342" font-size="13" fill="#697479" text-anchor="middle">Therapeutic Massage</text>
+        <g font-size="13" fill="#697479" text-anchor="middle"><text x="90" y="310">Morning</text><text x="230" y="310">Midday</text></g>
+        <g font-size="13"><text x="50" y="342" fill="#8f9e8f" font-weight="700">━ Stable Areas</text><text x="170" y="342" fill="#b85b6c" font-weight="700">━ Elevated Area</text></g>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section class="values-section">
+  <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; text-align: center; margin: 0 0 50px 0; color: var(--text-main);">Our Guiding Engineering Principles</h2>
+  <div class="values-grid">
+    <div class="value-box">
+      <h4>Absolute Comfort</h4>
+      <p>From the precise material selection of the soft TPU shell to the calibrated intensity of the micro-vibration motors, every specification is rigorously tested to ensure prolonged physical comfort and absolute skin safety for lactating mothers.</p>
+    </div>
+    <div class="value-box">
+      <h4>Clinical Collaboration</h4>
+      <p>Our core safety algorithms and massage cessation protocols were developed via continuous feedback loops with professional gynecologists and specialized maternity nurses. MammoPatch bridges the gap between hardware engineering and genuine clinical utility.</p>
+    </div>
+    <div class="value-box">
+      <h4>Unyielding Privacy</h4>
+      <p>We respect the sensitive nature of biometric data. All thermal readings and behavioral logs transmitted by the device utilize modern encryption standards, ensuring our entire hardware-software ecosystem is fully compliant with comprehensive GDPR regulations.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}
